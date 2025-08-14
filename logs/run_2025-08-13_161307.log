@@ -1,0 +1,75 @@
+
+=== Cliente: TU-RUT-AQUI ===
+[Extracción] venta (headless=True)…
+Advertencia: No disponible venta 2017-01: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//select[@ng-model='periodoAnho']"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x63df96eb201a <unknown>
+#1 0x63df96951a70 <unknown>
+#2 0x63df969a3907 <unknown>
+#3 0x63df969a3b01 <unknown>
+#4 0x63df969f1d54 <unknown>
+#5 0x63df969c940d <unknown>
+#6 0x63df969ef14f <unknown>
+#7 0x63df969c91b3 <unknown>
+#8 0x63df9699559b <unknown>
+#9 0x63df96996971 <unknown>
+#10 0x63df96e771eb <unknown>
+#11 0x63df96e7af39 <unknown>
+#12 0x63df96e5e2c9 <unknown>
+#13 0x63df96e7bae8 <unknown>
+#14 0x63df96e42baf <unknown>
+#15 0x63df96e9f0a8 <unknown>
+#16 0x63df96e9f286 <unknown>
+#17 0x63df96eb0ff6 <unknown>
+#18 0x74a733e9caa4 <unknown>
+#19 0x74a733f29c3c <unknown>
+
+Advertencia: No disponible venta 2017-02: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//select[@ng-model='periodoAnho']"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x63df96eb201a <unknown>
+#1 0x63df96951a70 <unknown>
+#2 0x63df969a3907 <unknown>
+#3 0x63df969a3b01 <unknown>
+#4 0x63df969f1d54 <unknown>
+#5 0x63df969c940d <unknown>
+#6 0x63df969ef14f <unknown>
+#7 0x63df969c91b3 <unknown>
+#8 0x63df9699559b <unknown>
+#9 0x63df96996971 <unknown>
+#10 0x63df96e771eb <unknown>
+#11 0x63df96e7af39 <unknown>
+#12 0x63df96e5e2c9 <unknown>
+#13 0x63df96e7bae8 <unknown>
+#14 0x63df96e42baf <unknown>
+#15 0x63df96e9f0a8 <unknown>
+#16 0x63df96e9f286 <unknown>
+#17 0x63df96eb0ff6 <unknown>
+#18 0x74a733e9caa4 <unknown>
+#19 0x74a733f29c3c <unknown>
+
+Advertencia: No disponible venta 2017-03: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//select[@ng-model='periodoAnho']"}
+  (Session info: chrome=139.0.7258.127); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+#0 0x63df96eb201a <unknown>
+#1 0x63df96951a70 <unknown>
+#2 0x63df969a3907 <unknown>
+#3 0x63df969a3b01 <unknown>
+#4 0x63df969f1d54 <unknown>
+#5 0x63df969c940d <unknown>
+#6 0x63df969ef14f <unknown>
+#7 0x63df969c91b3 <unknown>
+#8 0x63df9699559b <unknown>
+#9 0x63df96996971 <unknown>
+#10 0x63df96e771eb <unknown>
+#11 0x63df96e7af39 <unknown>
+#12 0x63df96e5e2c9 <unknown>
+#13 0x63df96e7bae8 <unknown>
+#14 0x63df96e42baf <unknown>
+#15 0x63df96e9f0a8 <unknown>
+#16 0x63df96e9f286 <unknown>
+#17 0x63df96eb0ff6 <unknown>
+#18 0x74a733e9caa4 <unknown>
+#19 0x74a733f29c3c <unknown>
+

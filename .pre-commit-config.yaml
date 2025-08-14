@@ -1,0 +1,64 @@
+# Pre-commit para Bekilly SII
+# Objetivo: higiene automática antes de cada commit
+# Formato / Lint / Orden de imports: Ruff (incluye isort integrado)
+
+minimum_pre_commit_version: "3.0.0"
+default_stages: [commit]
+fail_fast: false
+
+repos:
+  # Validaciones básicas de archivos
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-ast
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]   # Evita CRLF al trabajar entre Windows/WSL
+
+  # Lint + Format (Ruff) — reemplaza a flake8 + isort + parte de pycodestyle
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.4
+    hooks:
+      - id: ruff
+        name: ruff (lint + autofix)
+        args: [--fix]
+        additional_dependencies: []
+      - id: ruff-format
+        name: ruff (format)
+
+  # Modernización de sintaxis (e.g., f-strings, patrones py311+)
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
+
+  # Ortografía simple en texto/código (opcional, comenta si molesta)
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        additional_dependencies: []
+        # Ignora palabras propias frecuentes; ajusta si hace ruido:
+        args: ["-L", "nd,teh,crate,evant,contrat,remuneracion,remuneraciones,Bekilly"]
+
+# Excluye rutas generadas/entornos
+exclude: |
+  (?x)^(
+    \.venv/|
+    build/|
+    dist/|
+    \.mypy_cache/|
+    \.pytest_cache/|
+    \.ruff_cache/|
+    \.idea/|
+    \.vscode/|
+    data/raw/|
+    data/processed/|
+    logs/
+  )

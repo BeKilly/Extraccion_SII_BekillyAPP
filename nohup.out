@@ -1,0 +1,22 @@
+
+=== Cliente: 76156793-4 ===
+[Extracción] venta (headless=False)…
+Headless: False
+Chrome bin: /usr/bin/google-chrome
+Chrome profile: /tmp/bekilly_chrome_t9alqlqr
+DevTools port: 44859
+Browser version: 139.0.7258.127
+Chromedriver (caps): 139.0.7258.68 (40ff94600b6ed9fa7778a3a2566f254ad85f2147-refs/branch-heads/7258@{#2228})
+[Extracción] compra (headless=False)…
+Headless: False
+Chrome bin: /usr/bin/google-chrome
+Chrome profile: /tmp/bekilly_chrome_7ru4l1lr
+DevTools port: 42789
+Browser version: 139.0.7258.127
+Chromedriver (caps): 139.0.7258.68 (40ff94600b6ed9fa7778a3a2566f254ad85f2147-refs/branch-heads/7258@{#2228})
+[Consolidación] Uniendo archivos descargados…
+[ERROR] consolidar_libros_por_rut() got an unexpected keyword argument 'carpeta_base'
+usage: bekilly-sii [-h] [--config CONFIG] [--no-extraccion]
+                   [--no-consolidacion] [--no-calculo]
+                   [--headless | --no-headless]
+bekilly-sii: error: unrecognized arguments: /

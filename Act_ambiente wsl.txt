@@ -1,0 +1,12 @@
+cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP
+sed -i 's/\r$//' wsl_env_check.sh
+# o, si tienes dos2unix:
+# dos2unix wsl_env_check.sh
+
+# agrega (o verifica) la primera línea del archivo:
+# !/usr/bin/env bash
+# y marca ejecutable:
+chmod +x wsl_env_check.sh
+
+# vuelve a correr:
+./wsl_env_check.sh

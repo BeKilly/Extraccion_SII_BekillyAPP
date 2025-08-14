@@ -1,0 +1,5 @@
+
+=== Cliente: TU-RUT-AQUI ===
+[Extracción] venta (headless=True)…
+[ERROR] Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+

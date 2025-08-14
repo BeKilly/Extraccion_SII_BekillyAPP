@@ -1,0 +1,147 @@
+nohup: ignoring input
+
+=== Cliente: 76156793-4 ===
+[Extracción] venta (headless=False)…
+Headless: False
+Chrome bin: /usr/bin/google-chrome
+Chrome profile: /tmp/bekilly_chrome_rtncn85w
+DevTools port: 49245
+Browser version: 139.0.7258.127
+Chromedriver (caps): 139.0.7258.68 (40ff94600b6ed9fa7778a3a2566f254ad85f2147-refs/branch-heads/7258@{#2228})
+Advertencia: No disponible VENTA 2024-01: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=139.0.7258.127)
+Stacktrace:
+#0 0x5fec4667a01a <unknown>
+#1 0x5fec46119a70 <unknown>
+#2 0x5fec461007fe <unknown>
+#3 0x5fec461285c9 <unknown>
+#4 0x5fec4619987f <unknown>
+#5 0x5fec461b6afc <unknown>
+#6 0x5fec461911b3 <unknown>
+#7 0x5fec4615d59b <unknown>
+#8 0x5fec4615e971 <unknown>
+#9 0x5fec4663f1eb <unknown>
+#10 0x5fec46642f39 <unknown>
+#11 0x5fec466262c9 <unknown>
+#12 0x5fec46643ae8 <unknown>
+#13 0x5fec4660abaf <unknown>
+#14 0x5fec466670a8 <unknown>
+#15 0x5fec46667286 <unknown>
+#16 0x5fec46678ff6 <unknown>
+#17 0x7c371189caa4 <unknown>
+#18 0x7c3711929c3c <unknown>
+
+Advertencia: No disponible VENTA 2024-02: Message: No se encontró selector de Año: Message: invalid session id
+Stacktrace:
+#0 0x5fec4667a01a <unknown>
+#1 0x5fec461198c3 <unknown>
+#2 0x5fec4615cecf <unknown>
+#3 0x5fec461912e6 <unknown>
+#4 0x5fec4618bde7 <unknown>
+#5 0x5fec4618af25 <unknown>
+#6 0x5fec460e1bd8 <unknown>
+#7 0x5fec4663f1eb <unknown>
+#8 0x5fec46642f39 <unknown>
+#9 0x5fec466262c9 <unknown>
+#10 0x5fec46643ae8 <unknown>
+#11 0x5fec4660abaf <unknown>
+#12 0x5fec460dfa24 <unknown>
+#13 0x7c371182a1ca <unknown>
+#14 0x7c371182a28b __libc_start_main
+#15 0x5fec460a3eea _start
+; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+Advertencia: No disponible VENTA 2024-03: Message: No se encontró selector de Año: Message: invalid session id
+Stacktrace:
+#0 0x5fec4667a01a <unknown>
+#1 0x5fec461198c3 <unknown>
+#2 0x5fec4615cecf <unknown>
+#3 0x5fec461912e6 <unknown>
+#4 0x5fec4618bde7 <unknown>
+#5 0x5fec4618af25 <unknown>
+#6 0x5fec460e1bd8 <unknown>
+#7 0x5fec4663f1eb <unknown>
+#8 0x5fec46642f39 <unknown>
+#9 0x5fec466262c9 <unknown>
+#10 0x5fec46643ae8 <unknown>
+#11 0x5fec4660abaf <unknown>
+#12 0x5fec460dfa24 <unknown>
+#13 0x7c371182a1ca <unknown>
+#14 0x7c371182a28b __libc_start_main
+#15 0x5fec460a3eea _start
+; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+[Extracción] compra (headless=False)…
+Headless: False
+Chrome bin: /usr/bin/google-chrome
+Chrome profile: /tmp/bekilly_chrome_lno7zhz2
+DevTools port: 43005
+Browser version: 139.0.7258.127
+Chromedriver (caps): 139.0.7258.68 (40ff94600b6ed9fa7778a3a2566f254ad85f2147-refs/branch-heads/7258@{#2228})
+Advertencia: No disponible COMPRA 2024-01: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=139.0.7258.127)
+Stacktrace:
+#0 0x64f4b5bcf01a <unknown>
+#1 0x64f4b566ea70 <unknown>
+#2 0x64f4b56557fe <unknown>
+#3 0x64f4b567d5c9 <unknown>
+#4 0x64f4b56ee87f <unknown>
+#5 0x64f4b570bafc <unknown>
+#6 0x64f4b56e61b3 <unknown>
+#7 0x64f4b56b259b <unknown>
+#8 0x64f4b56b3971 <unknown>
+#9 0x64f4b5b941eb <unknown>
+#10 0x64f4b5b97f39 <unknown>
+#11 0x64f4b5b7b2c9 <unknown>
+#12 0x64f4b5b98ae8 <unknown>
+#13 0x64f4b5b5fbaf <unknown>
+#14 0x64f4b5bbc0a8 <unknown>
+#15 0x64f4b5bbc286 <unknown>
+#16 0x64f4b5bcdff6 <unknown>
+#17 0x76f577c9caa4 <unknown>
+#18 0x76f577d29c3c <unknown>
+
+Advertencia: No disponible COMPRA 2024-02: Message: No se encontró selector de Año: Message: invalid session id
+Stacktrace:
+#0 0x64f4b5bcf01a <unknown>
+#1 0x64f4b566e8c3 <unknown>
+#2 0x64f4b56b1ecf <unknown>
+#3 0x64f4b56e62e6 <unknown>
+#4 0x64f4b56e0de7 <unknown>
+#5 0x64f4b56dff25 <unknown>
+#6 0x64f4b5636bd8 <unknown>
+#7 0x64f4b5b941eb <unknown>
+#8 0x64f4b5b97f39 <unknown>
+#9 0x64f4b5b7b2c9 <unknown>
+#10 0x64f4b5b98ae8 <unknown>
+#11 0x64f4b5b5fbaf <unknown>
+#12 0x64f4b5634a24 <unknown>
+#13 0x76f577c2a1ca <unknown>
+#14 0x76f577c2a28b __libc_start_main
+#15 0x64f4b55f8eea _start
+; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+Advertencia: No disponible COMPRA 2024-03: Message: No se encontró selector de Año: Message: invalid session id
+Stacktrace:
+#0 0x64f4b5bcf01a <unknown>
+#1 0x64f4b566e8c3 <unknown>
+#2 0x64f4b56b1ecf <unknown>
+#3 0x64f4b56e62e6 <unknown>
+#4 0x64f4b56e0de7 <unknown>
+#5 0x64f4b56dff25 <unknown>
+#6 0x64f4b5636bd8 <unknown>
+#7 0x64f4b5b941eb <unknown>
+#8 0x64f4b5b97f39 <unknown>
+#9 0x64f4b5b7b2c9 <unknown>
+#10 0x64f4b5b98ae8 <unknown>
+#11 0x64f4b5b5fbaf <unknown>
+#12 0x64f4b5634a24 <unknown>
+#13 0x76f577c2a1ca <unknown>
+#14 0x76f577c2a28b __libc_start_main
+#15 0x64f4b55f8eea _start
+; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+
+
+✔ Flujo finalizado

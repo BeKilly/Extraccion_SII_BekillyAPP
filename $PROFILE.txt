@@ -1,0 +1,7 @@
+function bekilly-up {
+    Set-Location "C:\Aut_Bekilly\Extraccion_SII_BekillyAPP"
+    .\.venv\Scripts\activate
+    python -m pip install -U pip
+    python -m pip install .
+    python main.py --config config\sample_config.yaml
+}

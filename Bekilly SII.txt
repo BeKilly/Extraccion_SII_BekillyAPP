@@ -1,0 +1,325 @@
+# Bekilly SII – Extracción RCV/F29 y Orquestación
+
+Automatización para extraer **Registro de Compras y Ventas (RCV)** y **F29** del SII, consolidar archivos y dejar listos los datasets para un ERP interno de eficiencia financiera. Pensado para correr **en WSL + VS Code** y también **desde Windows (PowerShell/CMD)** con un único comando.
+
+---
+
+## 🚀 Capacidades
+
+* **Login SII** con RUT/Clave (sin persistir credenciales en código).
+* **Extracción RCV** (Compra y Venta) por períodos.
+* **Descarga F29** (flujo Ver → Ingresar → PDF Formulario Compacto → Volver).
+* **Consolidación** a estructura estándar (encabezados definidos en `encabezados.xlsx`).
+* **Ejecución headless/visible**, multi-cliente, multi-período.
+* **Logs** detallados y trazabilidad de ejecuciones.
+
+---
+
+## 📁 Estructura sugerida del proyecto
+
+```
+Extraccion_SII_BekillyAPP/
+├─ config/
+│  ├─ sample_config.yaml           # Ruta de base y parámetros de ejecución
+│  └─ credenciales.sample.yaml     # Ejemplo de cómo referenciar credenciales via env
+├─ data/
+│  ├─ raw/                         # Descargas originales
+│  └─ processed/                   # Archivos consolidados
+├─ src/
+│  ├─ bekilly_sii/
+│  │  ├─ __init__.py
+│  │  ├─ cli.py                    # Punto de entrada CLI (bekilly-sii)
+│  │  ├─ extraccion.py             # Lógica Selenium/flows SII
+│  │  ├─ consolidacion.py          # Limpieza y estandarización
+│  │  └─ utils.py                  # Helpers (paths, logs, fechas)
+├─ logs/
+├─ .venv/                          # Entorno virtual (autogenerado)
+├─ Makefile
+├─ main.py                         # Arranque alternativo sin CLI
+├─ README.md
+├─ requirements.txt
+└─ setup.cfg
+```
+
+> **Nota**: si usas `pyproject.toml`, convive sin problema con `setup.cfg` (para linters/pytest). No se persisten credenciales: usa variables de entorno o un `keyring` local.
+
+---
+
+## 🧩 Requisitos
+
+* **Windows 10/11** con **WSL (Ubuntu)** configurado.
+* **Google Chrome** instalado en WSL (`/usr/bin/google-chrome`).
+* **Selenium Manager** (incluido en Selenium ≥ 4.20) – no necesitas gestionar ChromeDriver.
+* **Python 3.11+** (en WSL). En Windows opcional si quieres correr el flujo nativo.
+
+---
+
+## ⚙️ Instalación y ejecución rápida (WSL + VS Code)
+
+```bash
+# 1) Abrir terminal en la carpeta del proyecto
+cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP
+
+# 2) Instalar dependencias en .venv e instalar la app
+make install
+
+# 3) Ejecutar con config por defecto (headless=True)
+make run
+
+# Variantes
+make run HEADLESS=false                   # Ver navegador
+make venta HEADLESS=false RUT="76123456-7"
+make compra                               # Solo compras
+make ambos TIPOS="VENTA COMPRA"          # Ambos
+
+# Limpiar y reinstalar
+make clean && make install
+```
+
+### Parámetros frecuentes (Makefile)
+
+* `CONFIG`: ruta a YAML de configuración. *Default:* `config/sample_config.yaml`
+* `TIPOS`: `VENTA`, `COMPRA` o ambos.
+* `HEADLESS`: `true`/`false`.
+* `RUT`: RUT del contribuyente objetivo (ejecución por cliente).
+
+---
+
+## 🪟 Ejecución directa desde Windows (sin entrar a WSL)
+
+### A) Un único comando usando WSL
+
+```powershell
+wsl -e bash -c "cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP && make install && make run"
+```
+
+### B) Alias de PowerShell (`bekilly-up`)
+
+Agrega esto a tu perfil (`notepad $PROFILE`):
+
+```powershell
+function bekilly-up {
+    wsl -e bash -c "cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP && make install && make run"
+}
+```
+
+Luego:
+
+```powershell
+bekilly-up
+```
+
+### C) Script por lotes (`bekilly-up.bat`)
+
+Crea `C:\Aut_Bekilly\Extraccion_SII_BekillyAPP\bekilly-up.bat`:
+
+```bat
+@echo off
+wsl -e bash -c "cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP && make install && make run"
+```
+
+---
+
+## 🔧 Configuración (`config/sample_config.yaml`)
+
+Ejemplo mínimo (ajusta rutas a tu entorno):
+
+```yaml
+# Dónde se guardan archivos
+paths:
+  raw: "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/data/raw"
+  processed: "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/data/processed"
+  encabezados: "/mnt/c/SII_Automatizacion/encabezados.xlsx"
+
+# Ejecución
+run:
+  headless: true
+  tipos: ["VENTA", "COMPRA"]   # default
+  periodos:
+    desde: "2017-01"
+    hasta: "2025-12"
+
+# Cliente actual (opcional aquí; usualmente por flag --rut)
+cliente:
+  rut: "76123456-7"
+
+# Logs
+logging:
+  level: "INFO"
+  dir: "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/logs"
+```
+
+---
+
+## 🖥️ Uso por CLI (sin Make)
+
+Tras `make install`, se registra el comando **`bekilly-sii`** dentro del `.venv`:
+
+```bash
+# venta, visible
+.venv/bin/bekilly-sii --config config/sample_config.yaml --tipos VENTA --no-headless --rut 76123456-7
+
+# ambos, headless
+.venv/bin/bekilly-sii --config config/sample_config.yaml --tipos VENTA COMPRA --rut 76123456-7
+```
+
+> Alternativa:
+
+```bash
+.venv/bin/python main.py --config config/sample_config.yaml --tipos VENTA COMPRA --rut 76123456-7
+```
+
+---
+
+## 🧪 Buenas prácticas de desarrollo
+
+* **Logs**: cada corrida genera archivo en `logs/` con timestamp.
+* **Rutas**: usa caminos absolutos en Linux (`/mnt/c/...`).
+* **Headless** para cron; visible para depurar.
+* **Sin credenciales en repo**: usa variables de entorno (`export RUT=...`) o un store local.
+* **Datos**: conserva `data/raw` como evidencia y `data/processed` para analítica.
+
+---
+
+## 🆘 Troubleshooting (rápido)
+
+* **“Unable to obtain driver for chrome”**: verifica que Chrome esté en WSL (`which google-chrome`) y que Selenium sea ≥ 4.20. Si estás en headless, prueba visible (`HEADLESS=false`) para ver el flujo.
+* **Lentitud al abrir**: primer lanzamiento prepara perfil/driver. Usa perfil temporal dedicado y `--disable-dev-shm-usage` en contenedores.
+* **No hace click en "Consultar"**: valida selectores y espera explícita (WebDriverWait por `element_to_be_clickable`).
+* **Permisos**: si `data/*` no se crea, revisa permisos de escritura en `/mnt/c/...`.
+
+---
+
+## 📦 Archivos de configuración del proyecto
+
+Copia/pega tal cual los siguientes contenidos.
+
+### `requirements.txt`
+
+```txt
+selenium==4.23.1
+pandas==2.2.2
+openpyxl==3.1.5
+xlrd==2.0.1
+webdriver-manager==4.0.2
+pyyaml==6.0.2
+python-dateutil==2.9.0.post0
+loguru==0.7.2
+```
+
+> Justificación: versiones estables y compatibles con Chrome 139+ y Selenium Manager; `dateutil` para manejo de períodos; `loguru` para logging claro.
+
+### `setup.cfg`
+
+```ini
+[flake8]
+max-line-length = 100
+extend-ignore = E203, W503
+exclude = .venv,build,dist
+
+[isort]
+profile = black
+line_length = 100
+
+[tool:pytest]
+minversion = 7.0
+addopts = -ra -q
+python_files = tests/*.py
+pythonpath = src
+
+[coverage:run]
+branch = True
+source = src/bekilly_sii
+
+[coverage:report]
+show_missing = True
+skip_covered = True
+
+[loguru]
+# Referencial: el formateo se define en código; este bloque documenta el estándar del proyecto.
+
+[mypy]
+python_version = 3.11
+ignore_missing_imports = True
+warn_unused_ignores = True
+warn_redundant_casts = True
+warn_unused_configs = True
+```
+
+> Si usas **Black** y **Ruff**:
+
+```ini
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+exclude = [".venv", "build", "dist"]
+```
+
+*(puedes poner estos bloques en `pyproject.toml` si prefieres centralizar).*
+
+---
+
+## 📜 Makefile (referencia rápida)
+
+```make
+.PHONY: install upgrade run run-headless venta compra ambos clean
+SHELL := /bin/bash
+-include .env
+export
+CONFIG ?= config/sample_config.yaml
+TIPOS ?= VENTA COMPRA
+HEADLESS ?= true
+RUT ?=
+VENV := .venv
+PY := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
+CLI := $(VENV)/bin/bekilly-sii
+HEADLESS_FLAG := $(if $(filter false,$(HEADLESS)),--no-headless,)
+TIPOS_FLAGS := $(if $(TIPOS),--tipos $(TIPOS),)
+RUT_FLAG := $(if $(RUT),--rut $(RUT),)
+
+install:
+	python3 -m venv $(VENV)
+	$(PIP) install -U pip
+	$(PIP) install -r requirements.txt
+	$(PIP) install -U .
+
+upgrade:
+	$(PIP) install -U .
+
+run:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) $(TIPOS_FLAGS) $(RUT_FLAG)
+
+run-headless:
+	$(CLI) --config $(CONFIG) $(TIPOS_FLAGS) $(RUT_FLAG)
+
+venta:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos VENTA $(RUT_FLAG)
+
+compra:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos COMPRA $(RUT_FLAG)
+
+ambos:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos VENTA COMPRA $(RUT_FLAG)
+
+clean:
+	rm -rf $(VENV) build dist .pytest_cache .ruff_cache .mypy_cache *.egg-info
+```
+
+---
+
+## ✅ Checklist de ejecución hoy
+
+1. Verifica Chrome en WSL: `google-chrome --version`.
+2. En VS Code (WSL): `cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP`.
+3. `make install` → prepara `.venv` e instala app.
+4. `make run HEADLESS=false RUT="76156793-4"` (visible para validar selects y botón **Consultar**).
+5. Revisa `data/raw` y `data/processed` + `logs/`.
+
+---
+
+## 📣 Nota final
+
+Este README, `requirements.txt` y `setup.cfg` están listos para producción interna. Si quieres, en la siguiente iteración agregamos **pipeline CI (GitHub Actions)** y una receta **Docker/DevContainer** con Chrome preinstalado para ejecución 100% replicable.

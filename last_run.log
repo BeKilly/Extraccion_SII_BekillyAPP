@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/main.py", line 11, in <module>
+    from conciliacion.sii.extraccion import extraer_rcv_tipo
+  File "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/src/conciliacion/sii/__init__.py", line 2, in <module>
+    from .extraccion import extraer_rcv_tipo
+  File "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP/src/conciliacion/sii/extraccion.py", line 2
+    from __future__ import annotations
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: from __future__ imports must occur at the beginning of the file

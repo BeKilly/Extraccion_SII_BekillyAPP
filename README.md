@@ -1,0 +1,144 @@
+
+# Bekilly SII – Extracción RCV/F29 y Orquestación
+
+Automatización para extraer **Registro de Compras y Ventas (RCV)** y **F29** del SII, consolidar archivos y dejar listos los datasets para un ERP interno de eficiencia financiera. Pensado para correr **en WSL + VS Code** y también **desde Windows (PowerShell/CMD)** con un único comando.
+
+---
+
+## 🚀 Capacidades
+- **Login SII** con RUT/Clave (sin persistir credenciales en código).
+- **Extracción RCV** (Compra y Venta) por períodos.
+- **Descarga F29** (flujo Ver → Ingresar → PDF Formulario Compacto → Volver).
+- **Consolidación** a estructura estándar (encabezados definidos en `encabezados.xlsx`).
+- **Ejecución headless/visible**, multi-cliente, multi-período.
+- **Logs** detallados y trazabilidad de ejecuciones.
+
+---
+
+## 📁 Estructura sugerida del proyecto
+
+
+Extraccion_SII_BekillyAPP/
+├─ config/
+│ ├─ sample_config.yaml
+│ └─ credenciales.sample.yaml
+├─ data/
+│ ├─ raw/
+│ └─ processed/
+├─ src/
+│ ├─ bekilly_sii/
+│ │ ├─ init.py
+│ │ ├─ cli.py
+│ │ ├─ extraccion.py
+│ │ ├─ consolidacion.py
+│ │ └─ utils.py
+├─ logs/
+├─ .venv/
+├─ Makefile
+├─ main.py
+├─ README.md
+├─ requirements.txt
+└─ setup.cfg
+
+
+---
+
+## 🧩 Requisitos
+- **Windows 10/11** con **WSL (Ubuntu)** configurado.
+- **Google Chrome** instalado en WSL (`/usr/bin/google-chrome`).
+- **Selenium Manager** incluido en Selenium ≥ 4.20.
+- **Python 3.11+** en WSL (y opcional en Windows para ejecución nativa).
+
+---
+
+## ⚙️ Instalación y ejecución rápida (WSL + VS Code)
+```bash
+cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP
+make install
+make run
+
+
+Variantes:
+
+make run HEADLESS=false
+make venta HEADLESS=false RUT="76123456-7"
+make compra
+make ambos TIPOS="VENTA COMPRA"
+
+
+Limpiar:
+
+make clean && make install
+
+🪟 Ejecución desde Windows
+
+PowerShell:
+
+wsl -e bash -c "cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP && make install && make run"
+
+
+Alias en PowerShell:
+
+function bekilly-up {
+    wsl -e bash -c "cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP && make install && make run"
+}
+
+🧪 Troubleshooting rápido
+
+Driver Chrome: google-chrome --version en WSL y Selenium ≥ 4.20.
+
+Lentitud inicial: primer arranque prepara perfil y driver.
+
+Botón “Consultar”: revisar selectores y usar WebDriverWait.
+
+📜 Makefile de referencia
+.PHONY: install upgrade run run-headless venta compra ambos clean
+SHELL := /bin/bash
+-include .env
+export
+CONFIG ?= config/sample_config.yaml
+TIPOS ?= VENTA COMPRA
+HEADLESS ?= true
+RUT ?=
+VENV := .venv
+PY := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
+CLI := $(VENV)/bin/bekilly-sii
+HEADLESS_FLAG := $(if $(filter false,$(HEADLESS)),--no-headless,)
+TIPOS_FLAGS := $(if $(TIPOS),--tipos $(TIPOS),)
+RUT_FLAG := $(if $(RUT),--rut $(RUT),)
+
+install:
+	python3 -m venv $(VENV)
+	$(PIP) install -U pip
+	$(PIP) install -r requirements.txt
+	$(PIP) install -U .
+
+run:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) $(TIPOS_FLAGS) $(RUT_FLAG)
+
+venta:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos VENTA $(RUT_FLAG)
+
+compra:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos COMPRA $(RUT_FLAG)
+
+ambos:
+	$(CLI) --config $(CONFIG) $(HEADLESS_FLAG) --tipos VENTA COMPRA $(RUT_FLAG)
+
+clean:
+	rm -rf $(VENV) build dist .pytest_cache .ruff_cache .mypy_cache *.egg-info
+
+
+---
+
+## **📄 requirements.txt**
+```txt
+selenium==4.23.1
+pandas==2.2.2
+openpyxl==3.1.5
+xlrd==2.0.1
+webdriver-manager==4.0.2
+pyyaml==6.0.2
+python-dateutil==2.9.0.post0
+loguru==0.7.2

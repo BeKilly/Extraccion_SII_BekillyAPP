@@ -1,0 +1,36 @@
+/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP
+code .
+make install   # prepara .venv e instala el paquete como CLI
+make run       # ejecuta usando sample_config.yaml
+python main.py --config config/sample_config.yaml
+
+🔹 Paso 1 — Ir a la carpeta del proyecto
+cd /mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP
+
+🔹 Paso 2 — Activar el entorno siempre
+source .venv/bin/activate
+
+
+Esto carga tu Python + librerías exactas.
+
+Ya no te tienes que preocupar por conflictos ni por usar librerías equivocadas.
+
+🔹 Paso 3 — Trabajar normal
+
+Ejecutar scripts:
+
+python main.py --config config/sample_config.yaml
+
+
+O usar make:
+
+make run
+
+🔹 Paso 4 — Al terminar
+
+Puedes cerrar la terminal o simplemente:
+
+deactivate
+
+
+Si la cierras, al volver a abrir WSL tendrás que repetir Paso 1 y 2.

@@ -1,0 +1,6 @@
+SII | Servicio de Impuestos Internos
+
+=== Cliente: 76156793-4 ===
+[Extracción] venta (headless=True)…
+[ERROR] Message: Unable to obtain driver for chrome; For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location
+

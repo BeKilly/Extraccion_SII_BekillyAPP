@@ -1,0 +1,9 @@
+-r requirements.txt
+pytest==8.3.2
+pytest-xdist==3.6.1
+pytest-cov==5.0.0
+pytest-html==4.1.1
+# pytest-selenium==4.1.0  # Úsalo solo si quieres sus fixtures; puede chocar con tu setup custom
+ruff==0.5.7
+black==24.8.0
+pre-commit>=3.7.1

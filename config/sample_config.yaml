@@ -1,0 +1,32 @@
+rutas:
+  carpeta_base: "/mnt/c/Aut_Bekilly/Extraccion_SII_BekillyAPP"   # Ruta en Windows (main.py la convierte a /mnt/c/... en WSL)
+  chrome_binary: "/usr/bin/google-chrome"                     # Detectado por wsl_env_check.sh
+  
+
+headless: false   # true = navegador oculto; false = visible
+
+# Credenciales de acceso al SII
+credenciales:
+  rut: "76156793-4"
+  clave: "Wkmed427"
+
+# También puedes usar 'clientes' si son varios:
+# clientes:
+#   - rut: "11.111.111-1"
+#     clave: "clave1"
+#   - rut: "22.222.222-2"
+#     clave: "clave2"
+
+descarga:
+  anho_inicio: 2024
+  mes_inicio: 1
+  anho_fin: 2024
+  mes_fin: 2
+  tipos_libro: ["venta", "compra"]
+
+# Configuración para cálculo (si se usa)
+calculo:
+  col_monto_exento: "Monto Exento" 
+  col_monto_neto: "Monto Neto"
+  col_tipo_doc: "Tipo Doc"
+  notas_credito: ["61"] # Códigos de notas de crédito
